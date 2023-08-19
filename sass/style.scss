@@ -1,6 +1,26 @@
-$desktop-sm: 1280px;
-$laptop: 1080px;
+$laptop: 1120px;
 $mobile: 767px;
+
+@font-face {
+  font-family: "Lato";
+  src: url("/font/Lato-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("/font/Lato-Semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url('../font/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
 
 @mixin btn-filled {
   background-color: $color-primary;
@@ -24,18 +44,44 @@ $mobile: 767px;
   }
 }
 
+html,
+body {
+  font-family: "Lato", sans-serif;
+}
 .container {
   padding: 0 20px;
   max-width: 1210px;
   margin: 0 auto;
 }
 .header {
-  padding: 33.5px 375px 31.5px 375.786px;
+  padding: 33.5px 0 31.5px;
   background: rgba(16, 16, 29, 0.90);
+  @include mobile {
+    padding: 16px 0;
+  }
   &__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &.opened-menu {
+      .burger {
+        transform: rotate(90deg);
+      }
+      .header__menu {
+        display: inline-flex;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(16, 16, 29);
+        z-index: 999;
+        padding: 40px;
+        ul {
+          flex-direction: column;
+        }
+      }
+    }
   }
   &__logo {
     color: #FFF;
@@ -45,6 +91,9 @@ $mobile: 767px;
     text-transform: uppercase;
     span {
       color: #42A9ED;
+    }
+    @include mobile {
+      font-size: 14px;
     }
   }
   &__menu {
@@ -65,6 +114,39 @@ $mobile: 767px;
       &.active {
         color: #43ABF0;
       }
+    }
+    @include mobile {
+      display: none;
+    }
+  }
+}
+.burger {
+  display: none;
+  position: relative;
+  width: 25px;
+  height: 18px;
+  transition: transform 0.3s ease-in-out;
+  pointer-events: all;
+  cursor: pointer;
+  @include mobile {
+    display: inline-block;
+  }
+  span {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    background-color: #fff;
+    &:first-child {
+      top: 0;
+    }
+    &:nth-child(2) {
+      top: 8px;
+    }
+    &:nth-child(3) {
+      top: 16px;
     }
   }
 }
@@ -100,12 +182,18 @@ $mobile: 767px;
   padding: 103px 0 203px;
   background: center/cover no-repeat url("./images/landos.png");
   color: #000;
+  @include mobile {
+    padding: 52px 0 102px;
+  }
   &__title {
     font-size: 48px;
     font-weight: 700;
     line-height: normal;
     text-transform: uppercase;
     max-width: 780px;
+    @include mobile {
+      font-size: 24px;
+    }
     span {
       color: #3E9CDC;
     }
@@ -116,6 +204,10 @@ $mobile: 767px;
     font-size: 20px;
     line-height: normal;
     max-width: 534px;
+    @include mobile {
+      margin-top: 40px;
+      font-size: 16px;
+    }
     &-title {
       font-weight: 700;
     }
@@ -133,15 +225,25 @@ $mobile: 767px;
     display: flex;
     gap: 30px;
     margin-top: 80px;
+    @include mobile {
+      margin-top: 40px;
+      gap: 20px;
+    }
   }
   &__btn {
     min-width: 183px;
+    @include mobile {
+      min-width: 120px;
+    }
   }
 }
 .order {
   padding: 121px 0 150px;
   background: center/cover no-repeat url("./images/bg.png");
   color: #FFF;
+  @include mobile {
+    padding: 60px 0 75px;
+  }
   &__wrapper {
     display: flex;
     flex-direction: column;
@@ -152,6 +254,9 @@ $mobile: 767px;
     font-weight: 800;
     line-height: normal;
     text-transform: uppercase;
+    @include mobile {
+      font-size: 20px;
+    }
     span {
       color: #3E9CDC;
     }
@@ -162,13 +267,23 @@ $mobile: 767px;
     font-weight: 400;
     line-height: normal;
     margin-top: 30px;
+    @include mobile {
+      font-size: 16px;
+      margin-top: 15px;
+    }
   }
   &__steps {
     display: flex;
     justify-content: space-between;
+    flex-wrap: nowrap;
     margin-top: 80px;
     gap: 30px;
     position: relative;
+    @include laptop {
+      margin-top: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
   &__step {
     display: flex;
@@ -176,8 +291,14 @@ $mobile: 767px;
     align-items: center;
     gap: 20px;
     flex: 1 0 auto;
-    width: calc(20% - 30px);
+    width: 209px;
     text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    @include mobile {
+      font-size: 14px;
+      max-width: 110px;
+    }
     &-circle {
       display: flex;
       align-items: center;
@@ -187,6 +308,15 @@ $mobile: 767px;
       background: #3E9CDC;
       border-radius: 50%;
       outline: 5px solid #286690;
+      @include mobile {
+        width: 60px;
+        height: 60px;
+        outline: 3px solid #286690;
+        svg {
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
   }
   &__form {
@@ -196,6 +326,9 @@ $mobile: 767px;
     min-width: 370px;
     margin: 40px auto 0;
     cursor: pointer;
+    @include mobile {
+      min-width: 185px;
+    }
   }
 }
 .inputs {
@@ -203,6 +336,11 @@ $mobile: 767px;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
   margin-top: 80px;
+  @include mobile {
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 40px;
+    grid-gap: 30px 20px;
+  }
 }
 .input {
   &__select {
@@ -278,7 +416,8 @@ $mobile: 767px;
 
       &_label {
         transition: all 250ms cubic-bezier(.4,.25,.3,1);
-        display: block;
+        display: inline-flex;
+        align-items: center;
         height: 0;
         overflow: hidden;
         background: rgba(39, 39, 51, 0.90);
@@ -286,7 +425,7 @@ $mobile: 767px;
         padding-left: 20px;
 
         &-placeholder {
-          height: 40px;
+          height: 48px;
           vertical-align: middle;
           position: absolute;
           top: 0;
@@ -304,7 +443,7 @@ $mobile: 767px;
             color: #fff;
             background: rgba(39, 39, 51, 0.90);
             .select_label {
-              height: 40px;
+              height: 48px;
               &:hover {background-color: #f7f7f7}
             }
 
@@ -314,8 +453,8 @@ $mobile: 767px;
       }
 
       &_input:checked + .select_label {
-        height: 40px;
-        margin-top: -40px;
+        height: 48px;
+        margin-top: -48px;
       }
     }
   }
@@ -336,10 +475,14 @@ $mobile: 767px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    @include mobile {
+      grid-area: auto;
+    }
   }
   &__range-caption {
     display: flex;
     justify-content: space-between;
+    gap: 20px;
   }
   &__range {
     -webkit-appearance: none;
@@ -403,7 +546,6 @@ $mobile: 767px;
         }
       }
     }
-
     &::-webkit-file-upload-button {
       visibility: hidden;
     }
@@ -426,6 +568,20 @@ $mobile: 767px;
   &__wrapper {
     display: flex;
     justify-content: space-between;
+    gap: 40px;
+    @include laptop {
+      flex-direction: column-reverse;
+      gap: 30px;
+    }
+  }
+
+  &__soc-side {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: space-between;
+    @include mobile {
+      flex-direction: column;
+    }
   }
 
   &__separator {
@@ -433,6 +589,14 @@ $mobile: 767px;
     width: 1px;
     height: 18px;
     background-color: #C3C3C3;
+    &:first-child {
+      @include laptop {
+        display: none;
+      }
+    }
+    @include mobile {
+      display: none;
+    }
   }
 
   &__link {
@@ -440,6 +604,9 @@ $mobile: 767px;
     align-items: center;
     gap: 10px;
     color: #FFF;
+    @include mobile {
+      margin-top: 10px;
+    }
 
     &:nth-of-type(1),
     &:nth-of-type(2),
