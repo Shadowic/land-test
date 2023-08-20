@@ -28,6 +28,10 @@ body {
 }
 
 .header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   padding: 33.5px 0 31.5px;
   background: rgba(16, 16, 29, 0.9);
 }
@@ -96,6 +100,18 @@ body {
     display: none;
   }
 }
+.header.is-sticky {
+  position: fixed;
+  animation: slideDown 0.35s ease-out;
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 
 .burger {
   display: none;
@@ -160,7 +176,7 @@ body {
 }
 
 .hero {
-  padding: 103px 0 203px;
+  padding: 203px 0 203px;
   background: center/cover no-repeat url("./images/landos.png");
   color: #000;
 }
