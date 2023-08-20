@@ -299,10 +299,25 @@ body {
       font-size: 14px;
       max-width: 110px;
     }
+    &:not(:last-child) {
+      .order__step-circle::after {
+        position: absolute;
+        left: 70%;
+        top: 45%;
+        display: block;
+        content: url("./images/bubles.svg");
+        width: 200px;
+        height: 200px;
+        @include laptop {
+          display: none;
+        }
+      }
+    }
     &-circle {
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       width: 90px;
       height: 90px;
       background: #3E9CDC;
